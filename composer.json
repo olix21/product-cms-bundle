@@ -1,0 +1,33 @@
+{
+  "name": "dywee/product-cms-bundle",
+  "type": "symfony-bundle",
+  "description": "Symfony3 bundle for easy management of eshop and products",
+  "keywords": ["product", "eshop", "commerce"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Olivier Delbruyère",
+      "email": "olivier.delbruyere@hotmail.com",
+      "homepage": "http://dywee.com",
+      "role": "Developer"
+    },
+    {
+      "name": "POITIER Johan",
+      "email": "poitierjohan@gmail.com",
+      "homepage": "http://dywee.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "dywee/core-bundle": "dev-master",
+    "dywee/product-bundle": "dev-master",
+    "stof/doctrine-extensions-bundle": "^1.2",
+    "vich/uploader-bundle": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Dywee\\ProductCMSBundle\\": ""
+    }
+  }
+}
