@@ -1,0 +1,14 @@
+{# Dywee\ProductCMSBundle\Resources\View\LatestProductContainer\edit.html.twig #}
+
+{%  extends "DyweeProductCMSBundle::admin.html.twig" %}
+
+{% block metaTitle %}
+    Modification de la configuration {{ parent() }}
+{% endblock %}
+
+
+{% block body %}
+    <h1>Modification de la configuration</h1>
+
+        {%  include "DyweeProductCMSBundle:LatestProductContainer:form.html.twig" %}
+{% endblock %}

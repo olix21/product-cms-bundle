@@ -1,0 +1,29 @@
+<li>
+<a class="cbp-vm-image" href="{{ path('product_cms_view', {id: product.url}) }}>"></a>
+    <div class="simpleCart_shelfItem"><a class="cbp-vm-image" href="{{ path('product_cms_view', {id: product.url}) }}">
+            <div class="view view-first">
+                <div class="inner_content clearfix">
+                    <div class="product_image">
+                        {% if product.getMainPicture() is not null %}
+                            <img src="{{ asset('images/products/' ~ product.getMainPicture().imageName) }}" class="img-responsive" alt="{{ product.name }}">
+                        {% endif %}
+                        <div class="mask">
+                            <div class="info">Quick View</div>
+                        </div>
+                        <div class="product_container">
+                            <div class="cart-left">
+                                <p class="title">{{ product.name }}</p>
+                            </div>
+                            <div class="pricey"><span class="item_price">{{ product.displayPrice|raw }}</span></div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div class="cbp-vm-details">
+            {{ product.shortDescription|striptags|raw }}
+        </div>
+        <a class="cbp-vm-icon cbp-vm-add item_add" href="{{ path('basket_add_product', {id: product.id}) }}">Add to cart</a>
+    </div>
+</li>

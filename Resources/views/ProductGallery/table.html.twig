@@ -1,0 +1,22 @@
+{# Dywee\ProductBundle\Resources\View\Eshop\table.html.twig #}
+
+{%  extends "DyweeProductBundle::admin.html.twig" %}
+
+{% block body %}
+    <a href="{{ path('product_gallery_add') }}" class="btn btn-success action-right"><i class="fa fa-plus"></i> Ajouter</a>
+
+    <div class="title-heading">
+        <h1 class="text-center">Liste des galleries de produits</h1>
+    </div>
+
+    {% if productGalleries|length > 0 or filterActive is defined and filterActive == true %}
+        <div class="box box-success">
+        {% include 'DyweeProductBundle:ProductGallery:miniTable.html.twig' %}
+        </div>
+
+    {% else %}
+        <p>Vous n'avez pas encore ajouté de gallerie de produit.</p>
+        <p><a href="{{ path('product_gallery_add') }}" class="btn btn-success"><i class="fa fa-plus"></i> Ajouter une gallerie</a></p>
+    {% endif %}
+
+{% endblock %}

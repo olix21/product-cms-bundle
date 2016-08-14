@@ -1,0 +1,27 @@
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for productGallery in productGalleries %}
+            <tr>
+                <td><small>{{ loop.index }}</small></td>
+                <td><a href="{{ path('product_gallery_view', {id: productGallery.id}) }}" class="link-unstyled">{{ product.name }}</a></td>
+                <td>
+                    <div class="btn-group btn-group-xs">
+                        <a href="{{ path('product_gallery_view', {id: productGallery.id}) }}" class="btn btn-xs btn-default"><i class="fa fa-eye"></i> </a>
+                        <a href="{{ path('product_gallery_update', {id: productGallery.id}) }}" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i> </a>
+                    </div>
+
+                    <a href="{{ path('product_gallery_delete', {id: productGallery.id}) }}" class="btn btn-xs btn-danger" data-confirm="Êtes-vous sûr de vouloir supprimer cette gallerie: " data-name="{{ productGallery.name }}"><i class="fa fa-trash-o"></i> </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

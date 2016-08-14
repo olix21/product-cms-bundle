@@ -1,0 +1,32 @@
+services:
+    dywee_product_cms.sidebar_handler:
+        class: Dywee\ProductCMSBundle\Service\ProductCMSAdminSidebarHandler
+        arguments: [ '@router' ]
+
+    dywee_product_cms.admin_sidebar_listener:
+        class: Dywee\ProductCMSBundle\Listener\AdminSidebarBuilderListener
+        arguments: [ '@dywee_product_cms.sidebar_handler' ]
+        tags:
+            - { name: kernel.event_subscriber }
+
+
+    ####################################################
+    #                                                  #
+    #                       STAT                       #
+    #                                                  #
+    ####################################################
+
+
+    dywee_product_cms.session_manager:
+        class: Dywee\ProductCMSBundle\Service\StatSessionManager
+        arguments: [ '@session' ]
+
+    dywee_product_cms.stat_manager:
+        class: Dywee\ProductCMSBundle\Service\ProductStatManager
+        arguments: [ '@doctrine.orm.entity_manager', '@dywee_product_cms.session_manager' ]
+
+    dywee_product_cms.stat_listener:
+        class: Dywee\ProductCMSBundle\Listener\ProductStatListener
+        arguments: [ '@dywee_product_cms.stat_manager' ]
+        tags:
+            - { name: kernel.event_subscriber }
