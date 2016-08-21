@@ -5,30 +5,31 @@ namespace Dywee\ProductCMSBundle\Service;
 use Doctrine\ORM\EntityManager;
 use Dywee\ProductBundle\Entity\BaseProduct;
 use Dywee\ProductBundle\Entity\ProductStat;
+use Dywee\ProductBundle\Service\SessionManager;
 use Dywee\ProductCMSBundle\DyweeProductCMSEvent;
 use Dywee\ProductCMSBundle\Event\ProductStatEvent;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class ProductStatManager{
 
     private $em;
     private $sessionManager;
 
-    public function __construct(EntityManager $entityManager, StatSessionManager $sessionManager)
+    public function __construct(EntityManager $entityManager, SessionManager $sessionManager)
     {
         $this->em = $entityManager;
         $this->sessionManager = $sessionManager;
     }
 
-    public function handleEvent(ProductStatEvent $productStatEvent)
+    public function handleEvent(ProductStatEvent $event)
     {
-        switch($productStatEvent->getEvent()){
+        switch($event->getEvent())
+        {
             case DyweeProductCMSEvent::PRODUCT_PAGE_DISPLAY:
-                return $this->createStatForDisplay($productStatEvent->getProduct());
-            case DyweeProductCMSEvent::PRODUCT_ADD_TO_BASKET:
-                return $this->createStatForBasket($productStatEvent->getProduct());
+                return $this->createStatForDisplay($event->getProduct());
+            case  DyweeProductCMSEvent::PRODUCT_ADD_TO_BASKET:
+                return $this->createStatForBasket($event->getProduct(), $event->getQuantity());
             case DyweeProductCMSEvent::PRODUCT_PURCHASED:
-                return $this->createStatForOrder($productStatEvent->getProduct());
+                return $this->createStatForOrder($event->getProduct(), $event->getQuantity());
         }
     }
 
@@ -36,15 +37,12 @@ class ProductStatManager{
     {
         $productStatRepository = $this->em->getRepository('DyweeProductBundle:ProductStat');
 
-        $productStat = $productStatRepository->findOneBy(array(
-            'product'       => $product,
-            'type'          => ProductStat::TYPE_DISPLAY,
-            'trackingKey'   => $this->sessionManager->getTrackingKey()
-        ));
+        $productStat = $productStatRepository->retrievedStatForProduct($product, ProductStat::TYPE_DISPLAY, $this->sessionManager->getTrackingKey());
 
-        // TODO vérifier qu'on a bien la même date
-        if($productStat)
-            $productStat->setQuantity($productStat->getQuantity()+1);
+        if(count($productStat) > 0){
+            $productStat = $productStat[0];
+            $productStat->setAttempts($productStat->getAttempts() + 1);
+        }
         else{
             $productStat = new ProductStat();
             $productStat->setProduct($product);
@@ -59,11 +57,20 @@ class ProductStatManager{
 
     public function createStatForBasket(BaseProduct $product, $quantity)
     {
-        $productStat = new ProductStat();
-        $productStat->setProduct($product);
-        $productStat->setQuantity($quantity);
-        $productStat->setType(ProductStat::TYPE_ADD_TO_BASKET);
-        $productStat->setTrackingKey($this->sessionManager->getTrackingKey());
+        $productStatRepository = $this->em->getRepository('DyweeProductBundle:ProductStat');
+        $productStat = $productStatRepository->retrievedStatForProduct($product, ProductStat::TYPE_DISPLAY, $this->sessionManager->getTrackingKey());
+
+        if(count($productStat) > 0){
+            $productStat = $productStat[0];
+            $productStat->setAttempts($productStat->getAttempts() + 1);
+        }
+        else {
+            $productStat = new ProductStat();
+            $productStat->setProduct($product);
+            $productStat->setQuantity($quantity);
+            $productStat->setType(ProductStat::TYPE_ADD_TO_BASKET);
+            $productStat->setTrackingKey($this->sessionManager->getTrackingKey());
+        }
 
         $this->em->persist($productStat);
         $this->em->flush();
@@ -71,11 +78,20 @@ class ProductStatManager{
 
     public function createStatForOrder(BaseProduct $product, $quantity)
     {
-        $productStat = new ProductStat();
-        $productStat->setProduct($product);
-        $productStat->setQuantity($quantity);
-        $productStat->setType(ProductStat::TYPE_BUY);
-        $productStat->setTrackingKey($this->sessionManager->getTrackingKey());
+        $productStatRepository = $this->em->getRepository('DyweeProductBundle:ProductStat');
+        $productStat = $productStatRepository->retrievedStatForProduct($product, ProductStat::TYPE_DISPLAY, $this->sessionManager->getTrackingKey());
+
+        if(count($productStat) > 0){
+            $productStat = $productStat[0];
+            $productStat->setAttempts($productStat->getAttempts() + 1);
+        }
+        else {
+            $productStat = new ProductStat();
+            $productStat->setProduct($product);
+            $productStat->setQuantity($quantity);
+            $productStat->setType(ProductStat::TYPE_BUY);
+            $productStat->setTrackingKey($this->sessionManager->getTrackingKey());
+        }
 
         $this->em->persist($productStat);
         $this->em->flush();
@@ -96,9 +112,14 @@ class ProductStatManager{
 
         $psr = $this->em->getRepository('DyweeProductBundle:ProductStat');
 
-        $views = $psr->getStats($product, ProductStat::TYPE_DISPLAY, $beginAt, $endAt, $timeScale);
-        $baskets = $psr->getStats($product, ProductStat::TYPE_ADD_TO_BASKET, $beginAt, $endAt, $timeScale);
-        $sales = $psr->getStats($product, ProductStat::TYPE_BUY, $beginAt, $endAt, $timeScale);
+        $types = array(
+            ProductStat::TYPE_DISPLAY,
+            ProductStat::TYPE_ADD_TO_BASKET,
+            ProductStat::TYPE_BUY,
+        );
+
+
+        $rawStats = $psr->getStats($product, $types, $beginAt, $endAt, $timeScale);
 
         $stats = array();
 
@@ -106,21 +127,18 @@ class ProductStatManager{
 
         $diff = (int) $endAt->diff($beginAt)->format('%a');
 
-        for($i = 0; $i <= $diff; $i++)
+        for($i = 0; $i < $diff; $i++)
         {
             $key = $date->modify('+1 day')->format('d/m/Y');
-            $stats[$key] = array('createdAt' => $key, 'view' => 0, 'basket' => 0, 'sale' => 0);
+            $stats[$key] = array(
+                'createdAt' => $date->format('d/m'));
+
+            foreach($types as $type)
+                $stats[$key][$type] = 0;
         }
 
-        //On organise les données des stats
-        foreach($views as $view)
-            $stats[$view['createdAt']->format('d/m/Y')]['view'] = $view['total'];
-
-        foreach($baskets as $basket)
-            $stats[$basket['createdAt']->format('d/m/Y')]['basket'] = $basket['total'];
-
-        foreach($sales as $sale)
-            $stats[$sale['createdAt']->format('d/m/Y')]['sale'] = $sale['total'];
+        foreach($rawStats as $stat)
+            $stats[$stat['createdAt']->format('d/m/Y')][$stat['type']] = $stat['total'];
 
         return $stats;
     }

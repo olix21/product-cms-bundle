@@ -14,9 +14,6 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductController extends Controller
 {
     /**
-     * @param BaseProduct $baseProduct
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @Route(name="product_cms_preview", path="product/{id}/preview")
      */
     public function previewAction(BaseProduct $baseProduct)
@@ -25,17 +22,14 @@ class ProductController extends Controller
     }
 
     /**
-     * @param BaseProduct $baseProduct
-     * @return \Symfony\Component\HttpFoundation\Response
-     *
      * @Route(name="product_cms_view", path="product/{id}")
      */
     public function viewAction(BaseProduct $baseProduct, Request $request)
     {
         $defaultData = array('quantity' => 1);
         $form = $this->createFormBuilder($defaultData)
-            ->add('quantity',       NumberType::class)
-            ->add('submit',         SubmitType::class, array('label' => 'Purchase now'))
+            ->add('quantity', NumberType::class)
+            ->add('submit', SubmitType::class, array('label' => 'Purchase now'))
             ->getForm();
 
         $form->handleRequest($request);
@@ -43,16 +37,26 @@ class ProductController extends Controller
 
         if ($form->isValid()) {
 
-            $this->get('event_dispatcher')->dispatch(DyweeProductCMSEvent::PRODUCT_ADD_TO_BASKET, $event->setEvent(DyweeProductCMSEvent::PRODUCT_ADD_TO_BASKET));
-            return $this->forward('DyweeOrderCMSBundle:Basket:add', array('id' => $baseProduct->getId(), 'quantity' => $form->getData()['quantity']));
+            $quantity = $form->getData()['quantity'];
+
+            $this->get('event_dispatcher')->dispatch(
+                DyweeProductCMSEvent::PRODUCT_ADD_TO_BASKET,
+                $event->setEvent(DyweeProductCMSEvent::PRODUCT_ADD_TO_BASKET)
+                    ->setQuantity($quantity)
+            );
+
+            return $this->forward('DyweeOrderCMSBundle:Basket:add', array(
+                'id' => $baseProduct->getId(),
+                'quantity' => $quantity
+            ));
         }
 
 
         $this->get('event_dispatcher')->dispatch(DyweeProductCMSEvent::PRODUCT_PAGE_DISPLAY, $event);
 
         return $this->render('DyweeProductCMSBundle:Product:view.html.twig', array(
-            'product'   => $baseProduct,
-            'form'      => $form->createView()
+            'product' => $baseProduct,
+            'form' => $form->createView()
         ));
     }
 

@@ -23,7 +23,7 @@ services:
 
     dywee_product_cms.stat_manager:
         class: Dywee\ProductCMSBundle\Service\ProductStatManager
-        arguments: [ '@doctrine.orm.entity_manager', '@dywee_product_cms.session_manager' ]
+        arguments: [ '@doctrine.orm.entity_manager', '@dywee_product.session_manager' ]
 
     dywee_product_cms.stat_listener:
         class: Dywee\ProductCMSBundle\Listener\ProductStatListener

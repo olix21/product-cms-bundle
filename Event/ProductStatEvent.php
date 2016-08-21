@@ -9,11 +9,24 @@ class ProductStatEvent extends Event
 {
     private $product;
     private $event;
+    private $quantity;
 
-    public function __construct(BaseProduct $product, $event)
+    public function __construct(BaseProduct $product, $event, $quantity = 1)
     {
         $this->product = $product;
         $this->event = $event;
+        $this->quantity = $quantity;
+    }
+
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+        return $this;
     }
 
     public function getProduct()
