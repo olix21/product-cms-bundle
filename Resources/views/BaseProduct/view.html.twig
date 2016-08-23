@@ -249,7 +249,7 @@
 
                     <div class="tab-content responsive hidden-xs hidden-sm">
                         <div class="tab-pane active" id="how-to">
-                            <p class="tab-text">{{ product.longDescription }}</p>
+                            <p class="tab-text">{{ product.longDescription|raw }}</p>
                         </div>
                         <div class="tab-pane" id="features">
                             <p class="tab-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nibh urna, euismod ut ornare non, volutpat vel tortor. Integer laoreet placerat suscipit. Sed sodales scelerisque commodo. Nam porta cursus lectus. Proin nunc erat, gravida a facilisis quis, ornare id lectus. Proin consectetur nibh quis urna gravida mollis.This tab has icon in consectetur adipiscing eliconse consectetur adipiscing elit. Vestibulum nibh urna, ctetur adipiscing elit. Vestibulum nibh urna, t.consectetur adipiscing elit. Vestibulum nibh urna,  Vestibulum nibh urna,it.</p>
@@ -386,7 +386,6 @@
             <div class="clearfix"></div>
         </div>
     </div>
-    {{ dump(product.relatedProducts|length) }}
 
     {% if product.relatedProducts|length > 0 %}
         <div class="other-products products-grid">
