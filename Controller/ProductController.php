@@ -22,7 +22,7 @@ class ProductController extends Controller
     }
 
     /**
-     * @Route(name="product_cms_view", path="product/{id}")
+     * @Route(name="product_cms_view", path="product/{id}", requirements={"id": "\d+"})
      */
     public function viewAction(BaseProduct $baseProduct, Request $request)
     {
