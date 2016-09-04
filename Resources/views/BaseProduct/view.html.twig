@@ -164,6 +164,12 @@
                         <h3>{{ product.name|upper }}</h3>
                         <span>€{{ product.price|number_format(2) }}</span>
                         <div class="clearfix"></div>
+                        <!--<div class="row">
+                            <div class="col-md-4 rating">* * * * *</div>
+                            <div class="col-md-8 rating-ratio">1 personne a évalué ce produit</div>
+                        </div>-->
+
+                        <div class="clearfix"></div>
                         {{ product.mediumDescription|raw }}
                     </div>
                     {% for featureElement in product.features %}
@@ -210,7 +216,7 @@
                                 {{ form_widget(form.quantity) }}
                             </div>
                             <div class="col-md-6">
-                                {{ form_widget(form.submit) }}
+                                {{ form_widget(form.purchase) }}
                             </div>
                         </div>
 

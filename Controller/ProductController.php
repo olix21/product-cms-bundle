@@ -29,7 +29,7 @@ class ProductController extends Controller
         $defaultData = array('quantity' => 1);
         $form = $this->createFormBuilder($defaultData)
             ->add('quantity', NumberType::class)
-            ->add('submit', SubmitType::class, array('label' => 'Purchase now'))
+            ->add('purchase', SubmitType::class)
             ->getForm();
 
         $form->handleRequest($request);
@@ -66,3 +66,4 @@ class ProductController extends Controller
         return $this->render('DyweeProductCMSBundle:BaseProduct:list.html.twig');
     }
 }
+

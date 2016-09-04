@@ -9,6 +9,16 @@ services:
         tags:
             - { name: kernel.event_subscriber }
 
+    dywee_product_cms.navbar_listener:
+        class: Dywee\ProductCMSBundle\Listener\PageListener
+        arguments: [ '@dywee_product_cms.page_data_handler' ]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    dywee_product_cms.page_data_handler:
+        class: Dywee\ProductCMSBundle\Service\PageDataHandler
+        arguments: [ '@router' ]
+
 
     ####################################################
     #                                                  #
