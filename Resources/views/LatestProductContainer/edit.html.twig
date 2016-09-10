@@ -8,7 +8,16 @@
 
 
 {% block body %}
-    <h1>Modification de la configuration</h1>
 
-        {%  include "DyweeProductCMSBundle:LatestProductContainer:form.html.twig" %}
+    <div class="col-md-6">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h1 class="box-title">Modification de la configuration</h1>
+            </div>
+            <div class="box-body">
+                {% include "DyweeProductCMSBundle:LatestProductContainer:form.html.twig" %}
+            </div>
+        </div>
+
+    </div>
 {% endblock %}
