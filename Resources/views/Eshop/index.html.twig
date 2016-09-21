@@ -1,0 +1,148 @@
+{% extends 'DyweeProductCMSBundle::layout.html.twig' %}
+
+{% block body %}
+    <div class="products-page">
+        <div class="products">
+            {% if categories|length > 0 %}
+                <div class="product-listy">
+                    <h2>our Products</h2>
+                    <ul class="product-list">
+                        {% for category in categories %}
+                            <li><a href="">New Products</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            {#<div class="latest-bis">
+                <img src="images/l4.jpg" class="img-responsive" alt="">
+                <div class="offer">
+                    <p>40%</p>
+                    <small>Top Offer</small>
+                </div>
+            </div>#}
+            {#<div class="tags">
+                <h4 class="tag_head">Tags Widget</h4>
+                <ul class="tags_links">
+                    <li><a href="#">Kitesurf</a></li>
+                    <li><a href="#">Super</a></li>
+                    <li><a href="#">Duper</a></li>
+                    <li><a href="#">Theme</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Equipment</a></li>
+                    <li><a href="#">Best</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Apparel</a></li>
+                    <li><a href="#">Super</a></li>
+                    <li><a href="#">Duper</a></li>
+                    <li><a href="#">Theme</a></li>
+                    <li><a href="#">Responsive</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Equipment</a></li>
+                </ul>
+
+            </div>#}
+
+        </div>
+        <div class="new-product">
+            <div class="new-product-top">
+                <ul class="product-top-list">
+                    <li><a href="index.html">Home</a>&nbsp;<span>&gt;</span></li>
+                    <li><span class="act">Best Sales</span>&nbsp;</li>
+                </ul>
+                <p class="back"><a href="{{ path('cms_homepage') }}">Back to homepage</a></p>
+                <div class="clearfix"></div>
+            </div>
+            {% if products|length > 0 %}
+                <div class="mens-toolbar">
+                    <div class="sort">
+                        <div class="sort-by">
+                            <label>Sort By</label>
+                            <select>
+                                <option value="">
+                                    Position                </option>
+                                <option value="">
+                                    Name                </option>
+                                <option value="">
+                                    Price                </option>
+                            </select>
+                            <a href=""><img src="images/arrow2.gif" alt="" class="v-middle"></a>
+                        </div>
+                    </div>
+                    <ul class="women_pagenation">
+                        <li>Page:</li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div id="cbp-vm" class="cbp-vm-switcher cbp-vm-view-grid">
+                    <div class="cbp-vm-options">
+                        <a href="#" class="cbp-vm-icon cbp-vm-grid cbp-vm-selected" data-view="cbp-vm-view-grid" title="grid">Grid View</a>
+                        <a href="#" class="cbp-vm-icon cbp-vm-list" data-view="cbp-vm-view-list" title="list">List View</a>
+                    </div>
+                    <div class="pages">
+                        <div class="limiter visible-desktop">
+                            <label>Show</label>
+                            <select>
+                                <option value="" selected="selected">
+                                    9                </option>
+                                <option value="">
+                                    15                </option>
+                                <option value="">
+                                    30                </option>
+                            </select> per page
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <ul>
+                        {% for product in products %}
+                            {% if product.seoUrl is defined and product.seoUrl != '' %}
+                                {% set url = path('product_cms_view', {seoUrl: product.seoUrl}) %}
+                            {% else %}
+                                {% set url = path('product_cms_view', {id: product.id}) %}
+                            {% endif %}
+                            <li>
+                                <a class="cbp-vm-image" href="{{ url }}">
+                                </a><div class="simpleCart_shelfItem"><a class="cbp-vm-image" href="{{ url }}">
+                                        <div class="view view-first">
+                                            <div class="inner_content clearfix">
+                                                <div class="product_image">
+                                                {% set picture = product.pictures|first %}
+                                                    <img src="{{ asset('images/products/' ~ picture.imageName) }}" alt="{{ product.name }}" class="img-responsive" />
+                                                    <div class="mask">
+                                                        <div class="info">{{ 'quickView'|trans }}</div>
+                                                    </div>
+                                                    <div class="product_container">
+                                                        <div class="cart-left">
+                                                            <p class="title">{{ product.name }}</p>
+                                                        </div>
+                                                        <div class="pricey"><span class="item_price">{{ product.displayPrice }}</span></div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="cbp-vm-details">
+                                        {{ product.shortDescription|raw }}
+                                    </div>
+                                    <a class="cbp-vm-icon cbp-vm-add item_add" href="#">Add to cart</a>
+                                </div>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </div>
+            {% else %}
+                <div>
+                    <p>No product found</p>
+                </div>
+            {% endif %}
+            <script src="js/cbpViewModeSwitch.js" type="text/javascript"></script>
+            <script src="js/classie.js" type="text/javascript"></script>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+{% endblock %}

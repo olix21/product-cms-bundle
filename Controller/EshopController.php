@@ -14,6 +14,14 @@ class EshopController extends Controller
      */
     public function indexAction()
     {
-        return new Response('eshop');
+        $em = $this->getDoctrine()->getManager();
+
+        $products = $em->getRepository('DyweeProductBundle:Product')->findBy(array(), array(), 9);
+        $categories = $em->getRepository('DyweeProductBundle:Category')->findBy(array(), array());
+
+        return $this->render('DyweeProductCMSBundle:Eshop:index.html.twig', array(
+            'products' => $products,
+            'categories' => $categories
+        ));
     }
 }
