@@ -24,7 +24,6 @@ class ProductGalleryType extends AbstractType
                 'multiple'      => true,
                 'required'      => false
             ))
-            ->add('valider', SubmitType::class)
         ;
     }
     

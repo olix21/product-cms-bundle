@@ -1,12 +1,20 @@
 {{ form_start(form) }}
 {{ form_rest(form) }}
 
-
+<div class="form-group">
+    <div class="col-sm-10 col-sm-offset-2">
+        <button type="submit" id="latest_product_validate" class="btn btn-success btn-block">
+            {{ 'validate'|trans }}
+        </button>
+    </div>
+</div>
 
 {{ form_end(form) }}
 
 <script>
+
     $(document).ready(function(){
         dywee_handle_form_collection('latest_product_container_elements');
     });
+
 </script>

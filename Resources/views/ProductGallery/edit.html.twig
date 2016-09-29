@@ -8,9 +8,18 @@
 
 
 {% block body %}
-    <div class="title-heading">
-        <h1>Edition d'une gallerie de produits</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-default">
+                <div class="box-header">
+                    <h1 class="box-title">Edition d'une gallerie de produits</h1>
+                </div>
+                <div class="box-body">
+                    {% include "DyweeProductCMSBundle:ProductGallery:form.html.twig" %}
+                </div>
+            </div>
+        </div>
     </div>
 
-    {%  include "DyweeProductCMSBundle:ProductGallery:form.html.twig" %}
 {% endblock %}

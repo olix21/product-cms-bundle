@@ -1,1 +1,18 @@
-{{ form(form) }}
+{{ form_start(form) }}
+{{ form_rest(form) }}
+
+<div class="form-group">
+    <div class="col-sm-10 col-sm-offset-2">
+        <button type="submit" id="product_gallery_valider" class="btn btn-success btn-block">
+            {{ 'validate'|trans }}
+        </button>
+    </div>
+</div>
+
+{{ form_end(form) }}
+
+<script>
+    $(document).ready(function(){
+        //$("#product_gallery_products").select2();
+    });
+</script>
