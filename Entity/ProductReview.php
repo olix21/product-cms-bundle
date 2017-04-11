@@ -4,6 +4,7 @@ namespace Dywee\ProductCMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Dywee\UserBundle\Entity\User;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * ProductReview
@@ -170,11 +171,11 @@ class ProductReview
     /**
      * Set createdBy
      *
-     * @param \Dywee\UserBundle\Entity\User $createdBy
+     * @param UserInterface $createdBy
      *
      * @return ProductReview
      */
-    public function setCreatedBy(User $createdBy = null)
+    public function setCreatedBy(UserInterface $createdBy = null)
     {
         $this->createdBy = $createdBy;
 
@@ -184,7 +185,7 @@ class ProductReview
     /**
      * Get createdBy
      *
-     * @return \Dywee\UserBundle\Entity\User
+     * @return UserInterface
      */
     public function getCreatedBy()
     {
