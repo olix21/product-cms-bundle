@@ -3,7 +3,6 @@
 namespace Dywee\ProductCMSBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Dywee\UserBundle\Entity\User;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
@@ -51,7 +50,7 @@ class ProductReview
      */
     private $moderated = false;
 
-    /**
+    /*
      * @ORM\ManyToOne(targetEntity="Dywee\UserBundle\Entity\User")
      */
     private $createdBy;
