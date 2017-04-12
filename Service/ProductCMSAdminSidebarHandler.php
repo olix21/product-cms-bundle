@@ -15,6 +15,7 @@ class ProductCMSAdminSidebarHandler{
 
     public function getSideBarMenuElement()
     {
+        /*
         $menu = array(
             'key' => 'cms',
             'children' => array(
@@ -32,5 +33,6 @@ class ProductCMSAdminSidebarHandler{
         );
 
         return $menu;
+        */
     }
 }
