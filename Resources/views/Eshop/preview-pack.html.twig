@@ -3,7 +3,7 @@
         <h3 class="product-title">{{ product.name }}</h3>
     </div>
     {% set img = product.images|first %}
-    <div class="imgLiquidFill imgLiquid product-img">
+    <div class="product-img">
         <img src="{{ img.src }}" alt="{{ product.name }}" class="img-responsive"/>
     </div>
     <div class="shortDescription">{{ product.shortDescription|raw }}</div>
