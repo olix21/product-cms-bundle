@@ -15,8 +15,6 @@
   "require": {
     "php": ">=7.1.0",
     "dywee/product-bundle": "dev-master",
-    "stof/doctrine-extensions-bundle": "^1.2",
-    "vich/uploader-bundle": "^1.6"
   },
   "autoload": {
     "psr-4": {
