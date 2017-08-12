@@ -14,7 +14,7 @@
   ],
   "require": {
     "php": ">=7.1.0",
-    "dywee/product-bundle": "dev-master",
+    "dywee/product-bundle": "dev-master"
   },
   "autoload": {
     "psr-4": {
