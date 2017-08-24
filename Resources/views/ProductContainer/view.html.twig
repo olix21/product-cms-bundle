@@ -1,0 +1,23 @@
+{# Dywee\ProductCMSBundle\Resources\View\ProductContainer\edit.html.twig #}
+
+{%  extends "DyweeProductCMSBundle::admin.html.twig" %}
+
+{% block metaTitle %}
+    Coup d'oeil sur {{ productContainer.name }}
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="col-md-6">
+        <div class="box box-default">
+            <div class="box-header with-border">
+                <h1 class="box-title">Coup d'oeil sur {{ productContainer.name }}</h1>
+            </div>
+            <div class="box-body">
+                {{ dump(productContainer) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

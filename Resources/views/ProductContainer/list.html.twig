@@ -1,0 +1,69 @@
+{% extends 'DyweeProductBundle::admin.html.twig' %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-7">
+            <div class="box box-default">
+                <div class="box-header">
+                    <div class="box-tools">
+                        <a href="{{ path('product_container_admin_add') }}" class="btn btn-box-tool btn-success"><i class="fa fa-plus"></i> Ajouter</a>
+                    </div>
+                    <h1 class="box-title">Product container list</h1>
+                </div>
+                {% if productContainers|length > 0 %}
+                    <table class="table table-hover table-stripped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Enabled</th>
+                            <th>max. elements</th>
+                            <th>number per row</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for productContainer in productContainers %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ productContainer.name }}</td>
+                                <td>TODO {# TODO #}</td>
+                                <td>{{ productContainer.max }}</td>
+                                <td>{{ productContainer.numberPerRow }}</td>
+                                <td>
+                                    <div class="btn-group btn-group-sm">
+                                        <a href="{{ path('product_container_admin_view', {id: productContainer.id}) }}"
+                                           class="btn btn-default"><i class="fa fa-eye"></i> </a>
+                                        <a href="{{ path('product_container_admin_update', {id: productContainer.id}) }}"
+                                           class="btn btn-default"><i class="fa fa-pencil"></i> </a>
+                                    </div>
+                                    <a href="{{ path('product_container_admin_delete', {id: productContainer.id}) }}"
+                                       class="btn btn-sm btn-danger"><i class="fa fa-trash-o"></i> </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div class="box-body">
+                        <p>No product container created so far.</p>
+                        <p><a href="{{ path('product_container_admin_add') }}" class="btn btn-success"><i class="fa fa-plus"></i> Create a product container</a>
+                        </p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="box box-info">
+                <div class="box-header">
+                    <h1 class="box-title">Product container informations</h1>
+                </div>
+
+                <div class="box-body">
+                    TODO
+                    {# TODO #}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
