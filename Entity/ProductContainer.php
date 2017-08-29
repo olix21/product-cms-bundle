@@ -161,7 +161,7 @@ class ProductContainer
     /**
      * Get elements
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \Doctrine\Common\Collections\Collection|ProductElement[]
      */
     public function getElements()
     {

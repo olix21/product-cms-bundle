@@ -2,6 +2,7 @@
 
 namespace Dywee\ProductCMSBundle\Controller;
 
+use App\Entity\GlobalMusicSheet;
 use Dywee\ProductCMSBundle\Entity\ProductContainer;
 use Dywee\ProductCMSBundle\Form\ProductContainerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -133,6 +134,16 @@ class ProductContainerController extends Controller
      */
     public function renderAction(ProductContainer $container)
     {
+        $repo = null;
+        foreach($container->getElements() as $element)
+        {
+            if (get_class($element->getProduct()) === 'App\Entity\GlobalMusicSheet') {
+               if (!$repo) {
+                   $repo = $this->getDoctrine()->getRepository('App\Entity\GlobalMusicSheet');
+               }
+               $musicSheet = $repo->find($element->getProduct()->getId());
+            }
+        }
         return $this->render('DyweeProductCMSBundle:ProductContainer:render.html.twig', ['productContainer' => $container]);
     }
 

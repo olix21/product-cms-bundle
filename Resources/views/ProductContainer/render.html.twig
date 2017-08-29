@@ -1,6 +1,6 @@
 <h2 class="text-center">{{ productContainer.name }}</h2>
 <div class="row">
-    {% set class = 12 * productContainer.numberPerRow / productContainer.max %}
+    {% set class = 12 * productContainer.numberPerRow / productContainer.ma x %}
     {% for row in productContainer.elements|batch(productContainer.numberPerRow) %}
         {% for element in row %}
             <div class="col-md-{{ class }}">
