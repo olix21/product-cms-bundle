@@ -3,15 +3,17 @@
 namespace Dywee\ProductCMSBundle\Controller;
 
 use Dywee\CoreBundle\Controller\ParentController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductGalleryController extends ParentController
 {
     /**
-     * @param Request $request
-     * @param null $parameters
      * @Route(path="/admin/productCMS/gallery/add", name="product_gallery_add")
+     *
+     * @param Request $request
+     * @param null    $parameters
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function addAction(Request $request, $parameters = null)
@@ -20,10 +22,12 @@ class ProductGalleryController extends ParentController
     }
 
     /**
-     * @param $id
-     * @param Request $request
-     * @param null $parameters
      * @Route(path="/admin/productCMS/gallery/{id}/edit", name="product_gallery_edit")
+     *
+     * @param         $id
+     * @param Request $request
+     * @param null    $parameters
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function updateAction($id, Request $request, $parameters = null)
@@ -32,10 +36,12 @@ class ProductGalleryController extends ParentController
     }
 
     /**
-     * @param $id
-     * @param Request $request
-     * @param null $parameters
      * @Route(path="/admin/productCMS/gallery/{id}/delete", name="product_gallery_delete")
+     *
+     * @param         $id
+     * @param Request $request
+     * @param null    $parameters
+     *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function deleteAction($id, Request $request, $parameters = null)
@@ -44,9 +50,11 @@ class ProductGalleryController extends ParentController
     }
 
     /**
-     * @param null $parameters
-     * @return \Symfony\Component\HttpFoundation\Response
      * @Route(path="/admin/productCMS/gallery", name="product_gallery_table")
+     *
+     * @param null $parameters
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function tableAction($parameters = null)
     {
@@ -54,10 +62,12 @@ class ProductGalleryController extends ParentController
     }
 
     /**
-     * @param $id
-     * @param null $parameters
-     * @return \Symfony\Component\HttpFoundation\Response
      * @Route(path="/admin/productCMS/gallery/{id}", name="product_gallery_view")
+     *
+     * @param      $id
+     * @param null $parameters
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction($id, $parameters = null)
     {

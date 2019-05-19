@@ -6,7 +6,7 @@ use App\Entity\GlobalMusicSheet;
 use Dywee\ProductCMSBundle\Entity\ProductContainer;
 use Dywee\ProductCMSBundle\Form\ProductContainerType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductContainerController extends Controller
@@ -32,15 +32,16 @@ class ProductContainerController extends Controller
 
         return $this->render(
             'DyweeProductCMSBundle:ProductContainer:list.html.twig', [
-            'productContainers' => $productContainers
+            'productContainers' => $productContainers,
         ]);
     }
 
     /**
+     * @Route(path="/admin/productCMS/latestProducts", name="product_cms_latest_products")
+     *
      * @param Request $request
      *
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route(path="/admin/productCMS/latestProducts", name="product_cms_latest_products")
      * @deprecated
      */
     public function deprecatedUpdateAction(Request $request)
@@ -122,7 +123,8 @@ class ProductContainerController extends Controller
      */
     public function viewAction(ProductContainer $container)
     {
-        return $this->render('DyweeProductCMSBundle:ProductContainer:view.html.twig', ['productContainer' => $container]);
+        return $this->render('DyweeProductCMSBundle:ProductContainer:view.html.twig',
+            ['productContainer' => $container]);
     }
 
     /**
@@ -135,16 +137,17 @@ class ProductContainerController extends Controller
     public function renderAction(ProductContainer $container)
     {
         $repo = null;
-        foreach($container->getElements() as $element)
-        {
+        foreach ($container->getElements() as $element) {
             if (get_class($element->getProduct()) === 'App\Entity\GlobalMusicSheet') {
-               if (!$repo) {
-                   $repo = $this->getDoctrine()->getRepository('App\Entity\GlobalMusicSheet');
-               }
-               $musicSheet = $repo->find($element->getProduct()->getId());
+                if (!$repo) {
+                    $repo = $this->getDoctrine()->getRepository('App\Entity\GlobalMusicSheet');
+                }
+                $musicSheet = $repo->find($element->getProduct()->getId());
             }
         }
-        return $this->render('DyweeProductCMSBundle:ProductContainer:render.html.twig', ['productContainer' => $container]);
+
+        return $this->render('DyweeProductCMSBundle:ProductContainer:render.html.twig',
+            ['productContainer' => $container]);
     }
 
     /**

@@ -6,10 +6,10 @@ use Dywee\ProductBundle\Entity\BaseProduct;
 use Dywee\ProductCMSBundle\DyweeProductCMSEvent;
 use Dywee\ProductCMSBundle\Event\ProductStatEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProductController extends Controller
 {

@@ -2,30 +2,28 @@
 
 namespace Dywee\ProductCMSBundle\Service;
 
-use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Routing\Router;
 
 class PageDataHandler
 {
     private $router;
 
-    public function __construct(RouterInterface $router)
+    public function __construct(Router $router)
     {
         $this->router = $router;
     }
 
     public function addDataToNavbar()
     {
-        return [
-            'pageList' => [
+        return array('pageList' => array(
 
-                $this->router->generate('eshop'),
-            ],
-        ];
+            $this->router->generate('eshop')
+        ));
     }
 
     public function addDataToFooter()
     {
-        return ['pageList' => $this->router->generate('eshop')];
+        return array('pageList' => $this->router->generate('eshop'));
     }
 
 }

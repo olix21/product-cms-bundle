@@ -2,20 +2,19 @@
 
 namespace Dywee\ProductCMSBundle\Service;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityManager;
 use Dywee\ProductBundle\Entity\BaseProduct;
 use Dywee\ProductBundle\Entity\ProductStat;
 use Dywee\ProductBundle\Service\SessionManager;
 use Dywee\ProductCMSBundle\DyweeProductCMSEvent;
 use Dywee\ProductCMSBundle\Event\ProductStatEvent;
 
-class ProductStatManager
-{
+class ProductStatManager{
 
     private $em;
     private $sessionManager;
 
-    public function __construct(EntityManagerInterface $entityManager, SessionManager $sessionManager)
+    public function __construct(EntityManager $entityManager, SessionManager $sessionManager)
     {
         $this->em = $entityManager;
         $this->sessionManager = $sessionManager;
@@ -23,7 +22,8 @@ class ProductStatManager
 
     public function handleEvent(ProductStatEvent $event)
     {
-        switch ($event->getEvent()) {
+        switch($event->getEvent())
+        {
             case DyweeProductCMSEvent::PRODUCT_PAGE_DISPLAY:
                 return $this->createStatForDisplay($event->getProduct());
             case  DyweeProductCMSEvent::PRODUCT_ADD_TO_BASKET:
@@ -37,13 +37,13 @@ class ProductStatManager
     {
         $productStatRepository = $this->em->getRepository('DyweeProductBundle:ProductStat');
 
-        $productStat = $productStatRepository->retrievedStatForProduct($product, ProductStat::TYPE_DISPLAY,
-            $this->sessionManager->getTrackingKey());
+        $productStat = $productStatRepository->retrievedStatForProduct($product, ProductStat::TYPE_DISPLAY, $this->sessionManager->getTrackingKey());
 
-        if (count($productStat) > 0) {
+        if(count($productStat) > 0){
             $productStat = $productStat[0];
             $productStat->setAttempts($productStat->getAttempts() + 1);
-        } else {
+        }
+        else{
             $productStat = new ProductStat();
             $productStat->setProduct($product);
             $productStat->setQuantity(1);
@@ -58,13 +58,13 @@ class ProductStatManager
     public function createStatForBasket(BaseProduct $product, $quantity)
     {
         $productStatRepository = $this->em->getRepository('DyweeProductBundle:ProductStat');
-        $productStat = $productStatRepository->retrievedStatForProduct($product, ProductStat::TYPE_DISPLAY,
-            $this->sessionManager->getTrackingKey());
+        $productStat = $productStatRepository->retrievedStatForProduct($product, ProductStat::TYPE_DISPLAY, $this->sessionManager->getTrackingKey());
 
-        if (count($productStat) > 0) {
+        if(count($productStat) > 0){
             $productStat = $productStat[0];
             $productStat->setAttempts($productStat->getAttempts() + 1);
-        } else {
+        }
+        else {
             $productStat = new ProductStat();
             $productStat->setProduct($product);
             $productStat->setQuantity($quantity);
@@ -79,13 +79,13 @@ class ProductStatManager
     public function createStatForOrder(BaseProduct $product, $quantity)
     {
         $productStatRepository = $this->em->getRepository('DyweeProductBundle:ProductStat');
-        $productStat = $productStatRepository->retrievedStatForProduct($product, ProductStat::TYPE_DISPLAY,
-            $this->sessionManager->getTrackingKey());
+        $productStat = $productStatRepository->retrievedStatForProduct($product, ProductStat::TYPE_DISPLAY, $this->sessionManager->getTrackingKey());
 
-        if (count($productStat) > 0) {
+        if(count($productStat) > 0){
             $productStat = $productStat[0];
             $productStat->setAttempts($productStat->getAttempts() + 1);
-        } else {
+        }
+        else {
             $productStat = new ProductStat();
             $productStat->setProduct($product);
             $productStat->setQuantity($quantity);
@@ -105,44 +105,40 @@ class ProductStatManager
 
     public function getForProductAndTimeRange(BaseProduct $product, $beginAt = null, $endAt = null, $timeScale = 'day')
     {
-        if (!$beginAt) {
+        if(!$beginAt)
             $beginAt = new \DateTime('last month');
-        }
-        if (!$endAt) {
+        if(!$endAt)
             $endAt = new \DateTime();
-        }
 
         $psr = $this->em->getRepository('DyweeProductBundle:ProductStat');
 
-        $types = [
+        $types = array(
             ProductStat::TYPE_DISPLAY,
             ProductStat::TYPE_ADD_TO_BASKET,
             ProductStat::TYPE_BUY,
-        ];
+        );
 
 
         $rawStats = $psr->getStats($product, $types, $beginAt, $endAt, $timeScale);
 
-        $stats = [];
+        $stats = array();
 
         $date = clone $beginAt;
 
-        $diff = (int)$endAt->diff($beginAt)->format('%a');
+        $diff = (int) $endAt->diff($beginAt)->format('%a');
 
-        for ($i = 0; $i < $diff; $i++) {
+        for($i = 0; $i < $diff; $i++)
+        {
             $key = $date->modify('+1 day')->format('d/m/Y');
-            $stats[$key] = [
-                'createdAt' => $date->format('d/m'),
-            ];
+            $stats[$key] = array(
+                'createdAt' => $date->format('d/m'));
 
-            foreach ($types as $type) {
+            foreach($types as $type)
                 $stats[$key][$type] = 0;
-            }
         }
 
-        foreach ($rawStats as $stat) {
+        foreach($rawStats as $stat)
             $stats[$stat['createdAt']->format('d/m/Y')][$stat['type']] = $stat['total'];
-        }
 
         return $stats;
     }

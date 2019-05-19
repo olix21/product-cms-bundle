@@ -2,33 +2,29 @@
 
 namespace Dywee\ProductCMSBundle\Service;
 
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
 
-class StatSessionManager
-{
+class StatSessionManager{
 
     private $session;
 
-    public function __construct(SessionInterface $session)
+    public function __construct(Session $session)
     {
         $this->session = $session;
     }
 
     public function setTrackingKey()
     {
-        $key = time() . '_' . $_SERVER['REMOTE_ADDR'] . '_' . rand(0, 99);
+        $key = time().'_'.$_SERVER['REMOTE_ADDR'].'_'.rand(0, 99);
         $this->session->set('product_tracking_key', $key);
-
         return $key;
     }
 
     public function getTrackingKey()
     {
         $trackingKey = $this->session->get('product_tracking_key');
-        if (!$trackingKey) {
+        if(!$trackingKey)
             return $this->setTrackingKey();
-        }
-
         return $trackingKey;
     }
 
