@@ -9,7 +9,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Router;
 
 
-class ProductStatListener implements EventSubscriberInterface{
+class ProductStatListener implements EventSubscriberInterface
+{
 
     private $productStatManager;
 

@@ -43,7 +43,9 @@ class LatestProductContainerController extends Controller
             $em->flush();
         }
 
-        return $this->render('DyweeProductCMSBundle:LatestProductContainer:edit.html.twig',
-            ['form' => $form->createView()]);
+        return $this->render(
+            'DyweeProductCMSBundle:LatestProductContainer:edit.html.twig',
+            ['form' => $form->createView()]
+        );
     }
 }

@@ -31,9 +31,11 @@ class ProductContainerController extends Controller
         $productContainers = $this->getDoctrine()->getRepository(ProductContainer::class)->findAll();
 
         return $this->render(
-            'DyweeProductCMSBundle:ProductContainer:list.html.twig', [
+            'DyweeProductCMSBundle:ProductContainer:list.html.twig',
+            [
             'productContainers' => $productContainers,
-        ]);
+            ]
+        );
     }
 
     /**
@@ -123,8 +125,10 @@ class ProductContainerController extends Controller
      */
     public function viewAction(ProductContainer $container)
     {
-        return $this->render('DyweeProductCMSBundle:ProductContainer:view.html.twig',
-            ['productContainer' => $container]);
+        return $this->render(
+            'DyweeProductCMSBundle:ProductContainer:view.html.twig',
+            ['productContainer' => $container]
+        );
     }
 
     /**
@@ -146,8 +150,10 @@ class ProductContainerController extends Controller
             }
         }
 
-        return $this->render('DyweeProductCMSBundle:ProductContainer:render.html.twig',
-            ['productContainer' => $container]);
+        return $this->render(
+            'DyweeProductCMSBundle:ProductContainer:render.html.twig',
+            ['productContainer' => $container]
+        );
     }
 
     /**

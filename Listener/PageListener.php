@@ -13,7 +13,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 
 
-class PageListener implements EventSubscriberInterface{
+class PageListener implements EventSubscriberInterface
+{
     private $pageDataHandler;
 
     public function __construct(PageDataHandler $pageDataHandler)
@@ -52,5 +53,4 @@ class PageListener implements EventSubscriberInterface{
     {
         $footerBuilderEvent->addData($this->pageDataHandler->addDataToFooter());
     }
-
 }

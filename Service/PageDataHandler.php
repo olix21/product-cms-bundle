@@ -25,5 +25,4 @@ class PageDataHandler
     {
         return array('pageList' => $this->router->generate('eshop'));
     }
-
 }

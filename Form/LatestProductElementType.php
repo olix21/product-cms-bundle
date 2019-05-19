@@ -16,7 +16,7 @@ class LatestProductElementType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product',    EntityType::class,          array(
+            ->add('product', EntityType::class, array(
                 'class'         => 'DyweeProductBundle:BaseProduct',
                 'choice_label'  => 'name',
                 'required'      => true

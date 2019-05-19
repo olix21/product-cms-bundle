@@ -19,8 +19,8 @@ class LatestProductContainerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('numberPerRow',           NumberType::class)
-            ->add('elements',  CollectionType::class,      array(
+            ->add('numberPerRow', NumberType::class)
+            ->add('elements', CollectionType::class, array(
                 'entry_type'    => LatestProductElementType::class,
                 'allow_add'     => true,
                 'allow_delete'  => true,

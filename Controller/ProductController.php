@@ -36,7 +36,6 @@ class ProductController extends Controller
         $event = new ProductStatEvent($baseProduct, DyweeProductCMSEvent::PRODUCT_PAGE_DISPLAY);
 
         if ($form->isValid()) {
-
             $quantity = $form->getData()['quantity'];
 
             $this->get('event_dispatcher')->dispatch(
@@ -66,4 +65,3 @@ class ProductController extends Controller
         return $this->render('DyweeProductCMSBundle:BaseProduct:list.html.twig');
     }
 }
-

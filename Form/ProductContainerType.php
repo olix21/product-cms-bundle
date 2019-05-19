@@ -19,9 +19,9 @@ class ProductContainerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name',           TextType::class)
-            ->add('numberPerRow',           NumberType::class)
-            ->add('elements',  CollectionType::class,      array(
+            ->add('name', TextType::class)
+            ->add('numberPerRow', NumberType::class)
+            ->add('elements', CollectionType::class, array(
                 'entry_type'    => ProductElementType::class,
                 'allow_add'     => true,
                 'allow_delete'  => true,

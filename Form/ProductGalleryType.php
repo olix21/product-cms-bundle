@@ -18,7 +18,7 @@ class ProductGalleryType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('products',    EntityType::class,          array(
+            ->add('products', EntityType::class, array(
                 'class'         => 'DyweeProductBundle:BaseProduct',
                 'choice_label'  => 'name',
                 'multiple'      => true,
