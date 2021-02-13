@@ -13,8 +13,8 @@
     }
   ],
   "require": {
-    "php": ">=7.1.0",
-    "dywee/product-bundle": "dev-master"
+    "php": ">=7.4",
+    "dywee/product-bundle": "*"
   },
   "autoload": {
     "psr-4": {
