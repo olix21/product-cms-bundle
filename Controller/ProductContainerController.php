@@ -5,11 +5,12 @@ namespace Dywee\ProductCMSBundle\Controller;
 use App\Entity\GlobalMusicSheet;
 use Dywee\ProductCMSBundle\Entity\ProductContainer;
 use Dywee\ProductCMSBundle\Form\ProductContainerType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProductContainerController extends Controller
+class ProductContainerController extends AbstractController
 {
     public function installAction()
     {

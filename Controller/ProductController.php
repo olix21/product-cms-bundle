@@ -5,13 +5,14 @@ namespace Dywee\ProductCMSBundle\Controller;
 use Dywee\ProductBundle\Entity\BaseProduct;
 use Dywee\ProductCMSBundle\DyweeProductCMSEvent;
 use Dywee\ProductCMSBundle\Event\ProductStatEvent;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class ProductController extends Controller
+class ProductController extends AbstractController
 {
     /**
      * @Route(name="product_cms_preview", path="product/{id}/preview")
@@ -39,9 +40,10 @@ class ProductController extends Controller
             $quantity = $form->getData()['quantity'];
 
             $this->get('event_dispatcher')->dispatch(
-                DyweeProductCMSEvent::PRODUCT_ADD_TO_BASKET,
                 $event->setEvent(DyweeProductCMSEvent::PRODUCT_ADD_TO_BASKET)
                     ->setQuantity($quantity)
+                ,
+                DyweeProductCMSEvent::PRODUCT_ADD_TO_BASKET
             );
 
             return $this->forward('DyweeOrderCMSBundle:Basket:add', array(
@@ -51,7 +53,7 @@ class ProductController extends Controller
         }
 
 
-        $this->get('event_dispatcher')->dispatch(DyweeProductCMSEvent::PRODUCT_PAGE_DISPLAY, $event);
+        $this->get('event_dispatcher')->dispatch($event, DyweeProductCMSEvent::PRODUCT_PAGE_DISPLAY);
 
         return $this->render('DyweeProductCMSBundle:Product:view.html.twig', array(
             'product' => $baseProduct,

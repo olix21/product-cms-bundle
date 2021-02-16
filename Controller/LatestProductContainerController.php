@@ -4,11 +4,12 @@ namespace Dywee\ProductCMSBundle\Controller;
 
 use Dywee\ProductCMSBundle\Entity\LatestProductContainer;
 use Dywee\ProductCMSBundle\Form\LatestProductContainerType;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
-class LatestProductContainerController extends Controller
+class LatestProductContainerController extends AbstractController
 {
     public function installAction()
     {

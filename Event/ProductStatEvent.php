@@ -3,7 +3,7 @@
 namespace Dywee\ProductCMSBundle\Event;
 
 use Dywee\ProductBundle\Entity\BaseProduct;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ProductStatEvent extends Event
 {
