@@ -1,6 +1,6 @@
 {# Dywee\EshopBundle\Resources\View\Eshop\browseByCategory.html.twig #}
 
-{%  extends "DyweeEshopBundle::layout.html.twig" %}
+{% extends "DyweeEshopBundle::layout.html.twig" %}
 
 {% block metaTitle %}
     Marque: {{ brand.name }}{{ parent() }}
@@ -9,6 +9,6 @@
 {% block bodyContent %}
     <h1>{{ brand.name }}</h1>
     {% for product in productList %}
-        {% include 'DyweeProductBundle:Eshop:preview-product.html.twig' %}
+        {% include '@DyweeProductBundle/Eshop/preview-product.html.twig' %}
     {% endfor %}
 {% endblock %}

@@ -65,7 +65,7 @@ class ProductContainerController extends AbstractController
             $em->flush();
         }
 
-        return $this->render('DyweeProductCMSBundle:ProductContainer:edit.html.twig', ['form' => $form->createView()]);
+        return $this->render('@DyweeProductCMSBundle/ProductContainer/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -90,7 +90,7 @@ class ProductContainerController extends AbstractController
             return $this->redirectToRoute('product_container_admin_list');
         }
 
-        return $this->render('DyweeProductCMSBundle:ProductContainer:edit.html.twig', ['form' => $form->createView()]);
+        return $this->render('@DyweeProductCMSBundle/ProductContainer/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**
@@ -114,7 +114,7 @@ class ProductContainerController extends AbstractController
             return $this->redirectToRoute('product_container_admin_list');
         }
 
-        return $this->render('DyweeProductCMSBundle:ProductContainer:edit.html.twig', ['form' => $form->createView()]);
+        return $this->render('@DyweeProductCMSBundle/ProductContainer/edit.html.twig', ['form' => $form->createView()]);
     }
 
     /**

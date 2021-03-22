@@ -1,6 +1,6 @@
 {# Dywee\ProductBundle\Resources\View\Eshop\table.html.twig #}
 
-{%  extends "DyweeCMSBundle::admin.html.twig" %}
+{% extends '@DyweeCMSBundle/admin.html.twig' %}
 
 {% block body %}
 
@@ -15,7 +15,7 @@
                 </div>
                 {% if productGalleries|length > 0 or filterActive is defined and filterActive == true %}
                     <div class="box box-success">
-                        {% include 'DyweeProductBundle:ProductGallery:miniTable.html.twig' %}
+                        {% include '@DyweeProductBundle/ProductGallery/miniTable.html.twig' %}
                     </div>
 
                 {% else %}

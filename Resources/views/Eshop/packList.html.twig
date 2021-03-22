@@ -1,6 +1,6 @@
 {# Dywee\EshopBundle\Resources\View\Eshop\packList.html.twig #}
 
-{%  extends "DyweeEshopBundle::layout.html.twig" %}
+{% extends "DyweeEshopBundle::layout.html.twig" %}
 
 {% block metaTitle %}
     Nos Colis Dégustation {{ parent() }}
@@ -13,7 +13,7 @@
 
     <div class="row">
         {% for productLang in productLangList %}
-            {% include 'DyweeEshopBundle:Eshop:preview-pack.html.twig' %}
+            {% include '@DyweeEshopBundle/Eshop/preview-pack.html.twig' %}
         {% endfor %}
     </div> <!-- /row -->
 {% endblock %}

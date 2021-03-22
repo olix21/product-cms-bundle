@@ -1,6 +1,6 @@
 {# Dywee\ProductCMSBundle\Resources\View\ProductContainer\edit.html.twig #}
 
-{%  extends "DyweeProductCMSBundle::admin.html.twig" %}
+{% extends "DyweeProductCMSBundle::admin.html.twig" %}
 
 {% block metaTitle %}
     Edition d'une gallerie de produits {{ parent() }}
@@ -16,7 +16,7 @@
                     <h1 class="box-title">Edition d'une gallerie de produits</h1>
                 </div>
                 <div class="box-body">
-                    {% include "DyweeProductCMSBundle:ProductGallery:form.html.twig" %}
+                    {% include '@DyweeProductCMSBundle/ProductGallery/form.html.twig' %}
                 </div>
             </div>
         </div>

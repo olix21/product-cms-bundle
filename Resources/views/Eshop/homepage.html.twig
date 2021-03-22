@@ -1,6 +1,6 @@
 {# Dywee\EshopBundle\Resources\View\Eshop\list.html.twig #}
 
-{%  extends "DyweeProductCMSBundle::layout.html.twig" %}
+{% extends "DyweeProductCMSBundle::layout.html.twig" %}
 
 {% block body %}
 
@@ -56,7 +56,7 @@
         <div class="clearfix"></div>
         <ul>
             {% for product in products %}
-                {% include 'DyweeProductCMSBundle:Eshop:preview-product.html.twig' %}
+                {% include '@DyweeProductCMSBundle/Eshop/preview-product.html.twig' %}
             {% endfor %}
         </ul>
     </div>

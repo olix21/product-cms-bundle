@@ -19,7 +19,7 @@ class ProductController extends AbstractController
      */
     public function previewAction(BaseProduct $baseProduct)
     {
-        return $this->render('DyweeProductCMSBundle:BaseProduct:preview.html.twig', array('product' => $baseProduct));
+        return $this->render('@DyweeProductCMSBundle/BaseProduct/preview.html.twig', array('product' => $baseProduct));
     }
 
     /**
@@ -55,7 +55,7 @@ class ProductController extends AbstractController
 
         $this->get('event_dispatcher')->dispatch($event, DyweeProductCMSEvent::PRODUCT_PAGE_DISPLAY);
 
-        return $this->render('DyweeProductCMSBundle:Product:view.html.twig', array(
+        return $this->render('@DyweeProductCMSBundle/Product/view.html.twig', array(
             'product' => $baseProduct,
             'form' => $form->createView()
         ));
@@ -64,6 +64,6 @@ class ProductController extends AbstractController
     public function listAction()
     {
         $productRespository = $this->getDoctrine()->getRepository('DyweeProductBundle:BaseProduct');
-        return $this->render('DyweeProductCMSBundle:BaseProduct:list.html.twig');
+        return $this->render('@DyweeProductCMSBundle/BaseProduct/list.html.twig');
     }
 }

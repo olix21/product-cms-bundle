@@ -1,6 +1,6 @@
 {# Dywee\EshopBundle\Resources\View\Eshop\abonnementList.html.twig #}
 
-{%  extends "DyweeEshopBundle::layout.html.twig" %}
+{% extends "DyweeEshopBundle::layout.html.twig" %}
 
 {% block metaTitle %}
     Nos abonnements bières {{ parent() }}
@@ -12,7 +12,7 @@
 
     <div class="row">
         {% for productLang in productLangList %}
-            {% include 'DyweeEshopBundle:Eshop:preview-abonnement.html.twig' %}
+            {% include '@DyweeEshopBundle/Eshop/preview-abonnement.html.twig' %}
         {% endfor %}
     </div> <!-- /row -->
 {% endblock %}

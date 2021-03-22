@@ -1,6 +1,6 @@
 {# Dywee\EshopBundle\Resources\View\Eshop\browseByCategory.html.twig #}
 
-{%  extends "DyweeEshopBundle::layout.html.twig" %}
+{% extends "DyweeEshopBundle::layout.html.twig" %}
 
 {% block metaTitle %}
     Catégorie: {{ category.name }}{{ parent() }}
@@ -12,7 +12,7 @@
         <div class="row">
             {% for product in row %}
                 <div class="col-md-4">
-                    {% include 'DyweeProductBundle:Eshop:preview-product.html.twig' %}
+                    {% include '@DyweeProductBundle/Eshop/preview-product.html.twig' %}
                 </div>
             {% endfor %}
         </div>
