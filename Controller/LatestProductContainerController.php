@@ -37,15 +37,16 @@ class LatestProductContainerController extends AbstractController
         }
 
         $form = $this->createForm(LatestProductContainerType::class, $object);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $request->getSession()->getFlashbag()->set('success', 'Bien enregistré');
             $em->persist($object);
             $em->flush();
         }
 
         return $this->render(
-            'DyweeProductCMSBundle:LatestProductContainer:edit.html.twig',
+            '@DyweeProductCMSBundle/LatestProductContainer/edit.html.twig',
             ['form' => $form->createView()]
         );
     }

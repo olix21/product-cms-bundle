@@ -11,8 +11,7 @@ use Symfony\Component\Routing\Router;
 
 class ProductStatListener implements EventSubscriberInterface
 {
-
-    private $productStatManager;
+    private ProductStatManager $productStatManager;
 
     public function __construct(ProductStatManager $productStatManager)
     {

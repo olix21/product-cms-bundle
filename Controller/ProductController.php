@@ -36,7 +36,7 @@ class ProductController extends AbstractController
         $form->handleRequest($request);
         $event = new ProductStatEvent($baseProduct, DyweeProductCMSEvent::PRODUCT_PAGE_DISPLAY);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $quantity = $form->getData()['quantity'];
 
             $this->get('event_dispatcher')->dispatch(

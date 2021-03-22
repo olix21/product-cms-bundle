@@ -32,7 +32,7 @@ class ProductContainerController extends AbstractController
         $productContainers = $this->getDoctrine()->getRepository(ProductContainer::class)->findAll();
 
         return $this->render(
-            'DyweeProductCMSBundle:ProductContainer:list.html.twig',
+            '@DyweeProductCMSBundle/ProductContainer/list.html.twig',
             [
             'productContainers' => $productContainers,
             ]
@@ -58,8 +58,9 @@ class ProductContainerController extends AbstractController
         }
 
         $form = $this->createForm(ProductContainerType::class, $object);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $request->getSession()->getFlashbag()->set('success', 'Bien enregistré');
             $em->persist($object);
             $em->flush();
@@ -80,8 +81,9 @@ class ProductContainerController extends AbstractController
         $container = new ProductContainer();
 
         $form = $this->createForm(ProductContainerType::class, $container);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $request->getSession()->getFlashbag()->set('success', 'Bien enregistré');
             $em->persist($container);
@@ -104,8 +106,9 @@ class ProductContainerController extends AbstractController
     public function updateAction(ProductContainer $container, Request $request)
     {
         $form = $this->createForm(ProductContainerType::class, $container);
+        $form->handleRequest($request);
 
-        if ($form->handleRequest($request)->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $request->getSession()->getFlashbag()->set('success', 'Bien enregistré');
             $em->persist($container);
@@ -127,7 +130,7 @@ class ProductContainerController extends AbstractController
     public function viewAction(ProductContainer $container)
     {
         return $this->render(
-            'DyweeProductCMSBundle:ProductContainer:view.html.twig',
+            '@DyweeProductCMSBundle/ProductContainer/view.html.twig',
             ['productContainer' => $container]
         );
     }
@@ -152,7 +155,7 @@ class ProductContainerController extends AbstractController
         }
 
         return $this->render(
-            'DyweeProductCMSBundle:ProductContainer:render.html.twig',
+            '@DyweeProductCMSBundle/ProductContainer/render.html.twig',
             ['productContainer' => $container]
         );
     }

@@ -10,12 +10,9 @@ use Dywee\CMSBundle\Event\PageBuilderEvent;
 use Dywee\ProductCMSBundle\Service\PageDataHandler;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-
-
-
 class PageListener implements EventSubscriberInterface
 {
-    private $pageDataHandler;
+    private PageDataHandler $pageDataHandler;
 
     public function __construct(PageDataHandler $pageDataHandler)
     {

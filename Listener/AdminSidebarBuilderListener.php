@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class AdminSidebarBuilderListener implements EventSubscriberInterface
 {
-    private $ProductCMSAdminSidebarHandler;
+    private ProductCMSAdminSidebarHandler $ProductCMSAdminSidebarHandler;
 
     public function __construct(ProductCMSAdminSidebarHandler $CMSAdminSidebarHandler)
     {
